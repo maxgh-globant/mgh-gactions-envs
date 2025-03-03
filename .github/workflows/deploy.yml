@@ -10,8 +10,8 @@ jobs:
   test:
     env:
       MONGODB_CLUSTER_ADDRESS: my.cluster.address
-      MONGODB_USERNAME: myuser
-      MONGODB_PASSWORD: mypassword
+      MONGODB_USERNAME: ${{ secrets.MONGODB_USERNAME }}
+      MONGODB_PASSWORD: ${{ secrets.MONGODB_PASSWORD }}
       PORT: 8080
     runs-on: ubuntu-latest
     steps:
@@ -36,6 +36,6 @@ jobs:
     steps:
       - name: Output information
         run: |
-          echo ${{ env.MONGODB_USERNAME }}
+          echo ${{ env.MONGODB_USERNAME }} # Won't be available as this env var is other job's scope and not global.
           echo $MONGODB_DB_NAME
         
